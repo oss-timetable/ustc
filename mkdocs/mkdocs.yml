@@ -1,5 +1,7 @@
 site_name: Oss-TimeTable/USTC
 site_url: https://oss-timetable.github.io/ustc/
+repo_name: oss-timetable/ustc
+repo_url: https://github.com/oss-timetable/ustc
 theme:
   name: material
   custom_dir: overrides
