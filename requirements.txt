@@ -22,3 +22,5 @@ opencv-python
 pytesseract
 
 mkdocs-material
+
+jieba
