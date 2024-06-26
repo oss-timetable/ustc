@@ -54,6 +54,11 @@ jobs:
           USTC_PASSPORT_PASSWORD: ${{ secrets.USTC_PASSPORT_PASSWORD }}
         run: |
           python main.py
+      - name: Run mkdocs
+        run: |
+          mv ./build/markdown/* ./mkdocs/docs
+          cd mkdocs && mkdocs build >> docs/log.txt 2>&1 && cd ..
+          mv ./mkdocs/site/* ./build
       - name: Publish to gh-pages
         run: |
           cd build

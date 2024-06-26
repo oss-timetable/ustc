@@ -1,0 +1,6 @@
+site_name: Oss-TimeTable/USTC
+site_url: https://oss-timetable.github.io/ustc/
+theme:
+  name: material
+nav:
+  - Home: index.md

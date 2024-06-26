@@ -4,6 +4,7 @@ pyyaml
 pytz
 tqdm
 jsonpickle
+jinja2
 
 feedparser
 feedgen
@@ -19,3 +20,5 @@ pillow
 numpy<2
 opencv-python
 pytesseract
+
+mkdocs-material
