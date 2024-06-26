@@ -18,7 +18,7 @@ async def get_and_clean_feed(url: str, path_to_save: str):
 
     new_feed = feedgenerator.Rss201rev2Feed(
         title=feed.feed.title,
-        link=f"https://static.xzkd.online/rss/{path_to_save.split('/')[-1]}",
+        link=f"https://oss-timetable.github.io/ustc/rss/{path_to_save.split('/')[-1]}",
         description="",
     )
 

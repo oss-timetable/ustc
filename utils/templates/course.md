@@ -1,4 +1,4 @@
-# {{course.name}}
+# {{semester.name}} {{course.name}} {{course.teacherName}}
 
 ## 考试安排
 
@@ -9,14 +9,14 @@
 
 ## 课程信息
 
-- 课程号：{{course.courseCode}}
-- 授课教师：{{course.teacherName}}
+- 课程号：{{course.lessonCode}}
 - 学分：{{course.credit}}
 - 教学类型：{{course.courseType}}
 - 开课单位：{{course.openDepartment}}
 - 课程类别：{{course.courseGradation}}
 - 课程层次：{{course.courseCategory}}
-- 上课时间：
+
+## 上课时间
 
 ```
 {{course.dateTimePlacePersonText}}

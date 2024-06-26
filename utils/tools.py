@@ -3,6 +3,9 @@ from datetime import datetime, timedelta
 from pytz import timezone
 from jinja2 import Template, Environment
 
+from models.course import Course
+from models.semester import Semester
+
 tz = timezone("Asia/Shanghai")
 
 
@@ -20,17 +23,16 @@ def save_json(obj: any, path: str):
     with open(path, "w") as f:
         f.write(jsonpickle.encode(obj, indent=4))
 
+
 def unix_timestamp_to_date_str(timestamp: int, format: str = "%Y-%m-%d %H:%M"):
     return datetime.fromtimestamp(timestamp, tz).strftime(format)
 
-def save_course_markdown(obj: any, path: str):
-    # read ./templates/course.md
+
+def save_course_markdown(semester: Semester, course: Course, path: str):
     env = Environment()
     env.filters["unix_timestamp_to_date_str"] = unix_timestamp_to_date_str
     with open("./utils/templates/course.md", "r") as f:
         template = env.from_string(f.read())
 
-
-    # render the template
     with open(path, "w") as f:
-        f.write(template.render(course=obj))
+        f.write(template.render(semester=semester, course=course))
