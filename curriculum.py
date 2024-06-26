@@ -77,7 +77,7 @@ async def fetch_semester(
 
 async def make_curriculum():
     base_path = os.path.dirname(os.path.abspath(__file__))
-    curriculum_path = os.path.join(base_path, "build", "curriculum")
+    curriculum_path = os.path.join(base_path, "build", "api", "curriculum")
     course_api_path = os.path.join(base_path, "build", "api", "course")
     if not os.path.exists(curriculum_path):
         os.makedirs(curriculum_path)
