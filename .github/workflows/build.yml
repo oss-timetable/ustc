@@ -25,7 +25,7 @@ jobs:
       - name: Checkout gh-pages
         uses: actions/checkout@v3
         with:
-          set-safe-directory: ''
+          set-safe-directory: ""
           repository: ${{ github.repository }}
           ref: gh-pages
           path: build
@@ -63,7 +63,3 @@ jobs:
           git add .
           git commit -m "Update from: ${{ github.sha }}" --allow-empty
           (git push -f origin gh-pages) || true
-      - name: Call webhook
-        env:
-          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
-        run: ruby tools/webhook.rb
