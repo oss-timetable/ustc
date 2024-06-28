@@ -1,11 +1,30 @@
 # {{semester.name}} {{course.name}} {{course.teacherName}}
 
-## 考试安排
 
 {% if course.exams | length > 0 %}
+
+## 考试安排
+
 | 考试名称 | 考试时间 | 考试地点 | 考试类型 | 考试模式 |
 | -------- | -------- | -------- | -------- | -------- |
 {% for exam in course.exams %}| {{exam.name}} | {{exam.startDate | unix_timestamp_to_date_str }} - {{exam.endDate | unix_timestamp_to_date_str("%H:%M") }} | {{exam.location}} | {{exam.examType}} | {{exam.examMode}} |
+{% endfor %}
+{% endif %}
+
+{% if course.homeworks | length > 0 %}
+## 作业情况
+{% for homework in course.homeworks | sort(attribute='index', reverse = True) %}
+### {{homework.name}}
+
+{% if homework.deadline %}
+- 截止时间：{{homework.deadline | unix_timestamp_to_date_str("%Y-%m-%d %H:%M") }}
+{% endif %}
+
+- 作业内容：
+
+```
+{{homework.content}}
+```
 {% endfor %}
 {% endif %}
 

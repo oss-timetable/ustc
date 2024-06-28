@@ -10,7 +10,7 @@ on:
   repository_dispatch:
     types: [retry_job]
   discussion_comment:
-    types: [created, edited]
+    types: [created, edited, deleted]
 
 permissions:
   contents: write
