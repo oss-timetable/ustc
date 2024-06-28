@@ -37,12 +37,10 @@ jobs:
           python-version: "3.10"
           cache: "pip"
       - name: Reset build to initial state
-        if: github.event_name != 'discussion_comment'
         run: |
           cd build
           git branch -m gh-pages old-gh-pages || true
           git checkout --orphan gh-pages
-          git rm -rf .
           cd ..
       - name: Install dependencies
         run: |
@@ -56,14 +54,14 @@ jobs:
           USTC_PASSPORT_USERNAME: ${{ secrets.USTC_PASSPORT_USERNAME }}
           USTC_PASSPORT_PASSWORD: ${{ secrets.USTC_PASSPORT_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LOAD_FROM_FILE: ${{ github.event_name == 'discussion_comment' && 'True' || 'False' }}
+          LOAD_FROM_FILE: ${{ contains(fromJSON('["push","discussion_comment"]'), github.event_name) && 'True' || 'False' }}
         run: |
           python main.py
       - name: Run mkdocs
         run: |
-          mv ./build/markdown/* ./mkdocs/docs
+          cp -r ./build/markdown/* ./mkdocs/docs
           cd mkdocs && mkdocs build >> docs/log.txt 2>&1 && cd ..
-          mv ./mkdocs/site/* ./build
+          cp -r ./mkdocs/site/* ./build
           wget -O minhtml https://github.com/wilsonzlin/minify-html/releases/download/v0.15.0/minhtml-0.15.0-x86_64-unknown-linux-gnu
           chmod +x minhtml
           for file in $(find ./build -type f -name '*.html'); do
