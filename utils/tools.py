@@ -9,8 +9,8 @@ from models.semester import Semester
 tz = timezone("Asia/Shanghai")
 
 
-def raw_date_to_unix_timestamp(date_str: str) -> int:
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
+def raw_date_to_unix_timestamp(date_str: str, format="%Y-%m-%d") -> int:
+    dt = datetime.strptime(date_str, format)
     tz_aware_datetime = tz.localize(dt)
     return int(tz_aware_datetime.timestamp())
 
@@ -22,6 +22,10 @@ def parse_header(raw: str) -> dict:
 def save_json(obj: any, path: str):
     with open(path, "w") as f:
         f.write(jsonpickle.encode(obj, indent=4))
+
+def load_json(path: str, type: any):
+    with open(path, "r") as f:
+        return jsonpickle.decode(f.read(), classes=type)
 
 
 def unix_timestamp_to_date_str(timestamp: int, format: str = "%Y-%m-%d %H:%M"):

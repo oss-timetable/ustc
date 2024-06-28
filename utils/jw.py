@@ -152,7 +152,9 @@ async def update_lectures(
 
     for schedule_json in json["scheduleList"]:
         course = [
-            course for course in course_list if course.id == schedule_json["lessonId"]
+            course
+            for course in course_list
+            if course.id == str(schedule_json["lessonId"])
         ][0]
 
         date = raw_date_to_unix_timestamp(schedule_json["date"])
@@ -194,7 +196,7 @@ async def update_lectures(
         )
 
         for course in course_list:
-            if course.id == schedule_json["lessonId"]:
+            if course.id == str(schedule_json["lessonId"]):
                 course.lectures.append(lecture)
                 break
 

@@ -1,5 +1,6 @@
 from models.lecture import Lecture
 from models.exam import Exam
+from models.homework import Homework
 
 
 class Course:
@@ -10,6 +11,7 @@ class Course:
     teacherName: str
     lectures: list[Lecture]
     exams: list[Exam]
+    homeworks: list[Homework]
     dateTimePlacePersonText: str
     courseType: str
     courseGradation: str
@@ -30,6 +32,7 @@ class Course:
         teacherName: str,
         lectures: list[Lecture],
         exams: list[Exam],
+        homeworks: list[Homework],
         dateTimePlacePersonText: str,
         courseType: str,
         courseGradation: str,
@@ -48,6 +51,7 @@ class Course:
         self.teacherName = teacherName
         self.lectures = lectures
         self.exams = exams
+        self.homeworks = homeworks
         self.dateTimePlacePersonText = dateTimePlacePersonText
         self.courseType = courseType
         self.courseGradation = courseGradation

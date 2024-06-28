@@ -5,6 +5,7 @@ pytz
 tqdm
 jsonpickle
 jinja2
+python-dotenv
 
 feedparser
 feedgen

@@ -124,13 +124,14 @@ async def get_courses(session: aiohttp.ClientSession, semester_id: str) -> list[
         teachers = ", ".join(teacher_name_list)
         result.append(
             Course(
-                id=course_json["id"],
+                id=str(course_json["id"]),
                 name=course_json["course"]["cn"],
                 courseCode=course_json["course"]["code"],
                 lessonCode=course_json["code"],
                 teacherName=teachers,
                 lectures=[],
                 exams=[],
+                homeworks=[],
                 dateTimePlacePersonText=course_json["dateTimePlacePersonText"]["cn"],
                 courseType=course_json["courseType"]["cn"],
                 courseGradation=course_json["courseGradation"]["cn"],
@@ -179,7 +180,7 @@ async def get_exams(
         examMode = exam_json["examMode"]
 
         name = exam_json["lesson"]["course"]["cn"]
-        id = exam_json["lesson"]["id"]
+        id = str(exam_json["lesson"]["id"])
 
         exam = Exam(
             startDate=startDate,

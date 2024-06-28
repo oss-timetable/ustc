@@ -9,6 +9,8 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [retry_job]
+  discussion_comment:
+    types: [created, edited]
 
 permissions:
   contents: write
@@ -35,6 +37,7 @@ jobs:
           python-version: "3.10"
           cache: "pip"
       - name: Reset build to initial state
+        if: github.event_name != 'discussion_comment'
         run: |
           cd build
           git branch -m gh-pages old-gh-pages || true
@@ -52,6 +55,8 @@ jobs:
           TZ: "Asia/Shanghai"
           USTC_PASSPORT_USERNAME: ${{ secrets.USTC_PASSPORT_USERNAME }}
           USTC_PASSPORT_PASSWORD: ${{ secrets.USTC_PASSPORT_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LOAD_FROM_FILE: ${{ github.event_name == 'discussion_comment' && 'True' || 'False' }}
         run: |
           python main.py
       - name: Run mkdocs
