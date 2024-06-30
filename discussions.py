@@ -21,6 +21,7 @@ def fetch_github_discussions(owner, repo):
                         comments(first: 100) {
                             nodes {
                                 body
+                                bodyHTML
                                 author {
                                     login
                                 }
@@ -38,7 +39,11 @@ def fetch_github_discussions(owner, repo):
                 }
             }
         }
-        """ % (owner, repo, cursor_str)
+        """ % (
+            owner,
+            repo,
+            cursor_str,
+        )
 
         headers = {
             "Authorization": f"bearer {GITHUB_TOKEN}",
@@ -65,14 +70,15 @@ def fetch_github_discussions(owner, repo):
             all_comments = []
             comment_cursor = None
             while True:
-                comments_page = discussion['comments']
-                all_comments.extend(comments_page['nodes'])
-                if not comments_page['pageInfo']['hasNextPage']:
+                comments_page = discussion["comments"]
+                all_comments.extend(comments_page["nodes"])
+                if not comments_page["pageInfo"]["hasNextPage"]:
                     break
-                comment_cursor = comments_page['pageInfo']['endCursor']
-                discussion['comments'] = fetch_page(comment_cursor)["data"]["repository"]["discussions"]["nodes"][0][
-                    'comments']
-            discussion['comments']['nodes'] = all_comments
+                comment_cursor = comments_page["pageInfo"]["endCursor"]
+                discussion["comments"] = fetch_page(comment_cursor)["data"][
+                    "repository"
+                ]["discussions"]["nodes"][0]["comments"]
+            discussion["comments"]["nodes"] = all_comments
         discussions.extend(page_discussions)
         if not result["data"]["repository"]["discussions"]["pageInfo"]["hasNextPage"]:
             break
@@ -81,7 +87,7 @@ def fetch_github_discussions(owner, repo):
     return discussions
 
 
-def parse_homework_from_comment(body: str) -> Homework:
+def parse_homework_from_comment(body: str, bodyHTML: str) -> Homework:
     # for title the following format are supported:
     # #*HW \d+:
     # #*HW\d+:
@@ -119,7 +125,13 @@ def parse_homework_from_comment(body: str) -> Homework:
         ddl = raw_date_to_unix_timestamp(ddl_text, format="%Y-%m-%d %H:%M")
         content = "\n".join(lines[2:])
 
-    return Homework(name=f"Homework {id}", index=int(id), deadline=ddl, content=content)
+    return Homework(
+        name=f"Homework {id}",
+        index=int(id),
+        deadline=ddl,
+        content=content,
+        contentHTML=bodyHTML,
+    )
 
 
 def main():
@@ -142,9 +154,10 @@ def main():
             if "author" not in comment or comment["author"] is None:
                 continue
 
-            body = comment['body']
+            body = comment["body"]
+            bodyHTML = comment["bodyHTML"]
             try:
-                homework = parse_homework_from_comment(body)
+                homework = parse_homework_from_comment(body, bodyHTML)
                 homeworks.append(homework)
             except Exception as e:
                 continue

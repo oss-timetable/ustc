@@ -22,9 +22,7 @@
 
 - 作业内容：
 
-```
 {{homework.content}}
-```
 {% endfor %}
 {% endif %}
 
