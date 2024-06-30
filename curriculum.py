@@ -57,6 +57,8 @@ async def fetch_course_info(session, semester, courses, sem, progress_bar):
         for course in courses:
             if course.id in course_homeworks.keys():
                 course.homeworks = course_homeworks[course.id]
+            else:
+                course.homeworks = []
             save_json(course, os.path.join(API_COURSE_PATH, f"{course.id}"))
             save_course_markdown(
                 semester, course, os.path.join(MARKDOWN_COURSE_PATH, f"{course.id}.md")
