@@ -5,7 +5,8 @@
       "locales": {
         "zh": "校主页"
       },
-      "url": "https://static.xzkd.online/rss/ustc_news.xml",
+      "url": "https://oss-timetable.github.io/ustc/rss/ustc_news.xml",
+      "jsonURL": "https://oss-timetable.github.io/ustc/rss/ustc_news.json",
       "icons": {
         "sf-symbols": "icloud.square.fill"
       },
@@ -16,7 +17,8 @@
       "locales": {
         "zh": "教务处"
       },
-      "url": "https://static.xzkd.online/rss/ustc_teach.xml",
+      "url": "https://oss-timetable.github.io/ustc/rss/ustc_teach.xml",
+      "jsonURL": "https://oss-timetable.github.io/ustc/rss/ustc_teach.json",
       "icons": {
         "sf-symbols": "person.crop.square.fill.and.at.rectangle"
       },
@@ -27,7 +29,8 @@
       "locales": {
         "zh": "应用通知"
       },
-      "url": "https://static.xzkd.online/rss/xzkd.xml",
+      "url": "https://oss-timetable.github.io/ustc/rss/oss-timetable.xml",
+      "jsonURL": "https://oss-timetable.github.io/ustc/rss/oss-timetable.json",
       "icons": {
         "sf-symbols": "apps.iphone"
       },

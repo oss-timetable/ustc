@@ -6,11 +6,12 @@ import asyncio
 from tqdm import tqdm
 import feedgenerator
 import datetime
+import json
 
 from utils.tj_rss import tj_ustc_RSS
 
 
-async def get_and_clean_feed(url: str, path_to_save: str):
+async def get_and_clean_feed(url: str, path_to_save: str, jsonFilepath: str):
     feed = feedparser.parse(url)
 
     if not feed.entries:
@@ -25,6 +26,7 @@ async def get_and_clean_feed(url: str, path_to_save: str):
     handler = html2text.HTML2Text()
     handler.ignore_links = True
     handler.ignore_images = True
+    feeds = []
 
     for entry in tqdm(
         feed.entries,
@@ -49,11 +51,23 @@ async def get_and_clean_feed(url: str, path_to_save: str):
                 description=description,
                 pubdate=date,
             )
+
+            feeds.append(
+                {
+                    "title": entry.title,
+                    "link": entry.link,
+                    "description": description,
+                    "dateString": date.strftime("%Y-%m-%d %H:%M:%S"),
+                    "date": int(date.timestamp()),
+                }
+            )
         except Exception as e:
             print(e)
 
     with open(path_to_save, "w") as f:
         new_feed.write(f, "utf-8")
+
+    json.dump(feeds, open(jsonFilepath, "w"), indent=4)
 
 
 async def make_rss():
@@ -71,7 +85,8 @@ async def make_rss():
 
     for feed in tqdm(config["feeds"], position=1, leave=True, desc="Processing feeds"):
         filepath = os.path.join(rss_path, feed["xmlFilename"])
-        await get_and_clean_feed(feed["url"], filepath)
+        jsonFilepath = os.path.join(rss_path, feed["jsonFilename"])
+        await get_and_clean_feed(feed["url"], filepath, jsonFilepath)
 
 
 def main():
