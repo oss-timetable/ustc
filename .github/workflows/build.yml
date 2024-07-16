@@ -53,6 +53,8 @@ jobs:
           TZ: "Asia/Shanghai"
           USTC_PASSPORT_USERNAME: ${{ secrets.USTC_PASSPORT_USERNAME }}
           USTC_PASSPORT_PASSWORD: ${{ secrets.USTC_PASSPORT_PASSWORD }}
+          USTC_PASSPORT_FINGERPRINT: ${{ secrets.USTC_PASSPORT_FINGERPRINT }}
+          USTC_PASSPORT_DEVICE_ID: ${{ secrets.USTC_PASSPORT_DEVICE_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LOAD_FROM_FILE: ${{ contains(fromJSON('["push","discussion_comment"]'), github.event_name) && 'True' || 'False' }}
         run: |

@@ -15,7 +15,7 @@ from utils.catalog import login as catalog_login
 from utils.jw import login as jw_login
 from utils.jw import update_lectures
 from utils.tools import save_json, save_course_markdown, load_json
-from utils.environs import LOAD_FROM_FILE
+from utils.environs import LOAD_FROM_FILE, USTC_PASSPORT_DEVICE_ID
 
 base_path = os.path.dirname(os.path.abspath(__file__))
 API_PATH = os.path.join(base_path, "build", "api")
@@ -34,14 +34,11 @@ if LOAD_FROM_FILE:
     async def get_semesters(session) -> list[Semester]:
         return load_json(os.path.join(API_PATH, "semesters"), list[Semester])
 
-
     async def get_courses(session, semester_id: str) -> list[Course]:
         return load_json(os.path.join(API_SEMESTER_PATH, semester_id), list[Course])
 
-
     async def get_exams(session, semester_id: str) -> dict[str, list[Exam]]:
         return {}
-
 
     async def update_lectures(session, courses: list[Course]) -> list[Course]:
         result = []
@@ -84,7 +81,7 @@ async def fetch_semester(session, semester):
         leave=True,
         desc=f"Processing {semester.name}",
     )
-    course_chunks = [courses[i: i + 50] for i in range(0, len(courses), 50)]
+    course_chunks = [courses[i : i + 50] for i in range(0, len(courses), 50)]
     tasks = [
         fetch_course_info(session, semester, course_chunk, sem, progress_bar)
         for course_chunk in course_chunks
@@ -94,7 +91,12 @@ async def fetch_semester(session, semester):
 
 
 async def make_curriculum():
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(
+        cookies={
+            "device": USTC_PASSPORT_DEVICE_ID,
+        },
+        trust_env=True,
+    ) as session:
         await catalog_login(session)
         await jw_login(session)
 
@@ -103,7 +105,7 @@ async def make_curriculum():
         save_json(semesters, os.path.join(API_PATH, "semesters"))
 
         for semester in tqdm(
-                semesters, position=1, leave=True, desc="Processing semesters"
+            semesters, position=1, leave=True, desc="Processing semesters"
         ):
             await fetch_semester(session, semester)
 
