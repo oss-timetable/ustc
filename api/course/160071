@@ -1,0 +1,21 @@
+{
+    "py/object": "models.course.Course",
+    "id": "160071",
+    "name": "\u521b\u65b0\u4e0e\u521b\u4e1a\u7ba1\u7406",
+    "courseCode": "MBAD6418P",
+    "lessonCode": "MBAD6418P.01",
+    "teacherName": "",
+    "lectures": [],
+    "exams": [],
+    "homeworks": [],
+    "dateTimePlacePersonText": null,
+    "courseType": "\u7406\u8bba\u8bfe",
+    "courseGradation": "\u7855\u58eb",
+    "courseCategory": "\u7814\u7a76\u751f\u8bfe\u7a0b",
+    "educationType": "\u7814\u7a76\u751f",
+    "classType": "\u57fa\u7840",
+    "openDepartment": "MBA\u4e2d\u5fc3",
+    "description": "",
+    "credit": 2,
+    "additionalInfo": {}
+}

@@ -1,0 +1,21 @@
+{
+    "py/object": "models.course.Course",
+    "id": "158986",
+    "name": "\u56e2\u7c07\u548c\u56e2\u7c07\u5316\u5b66",
+    "courseCode": "CHEM6026P",
+    "lessonCode": "CHEM6026P.01",
+    "teacherName": "\u6768\u6674, \u5b5f\u5f81",
+    "lectures": [],
+    "exams": [],
+    "homeworks": [],
+    "dateTimePlacePersonText": "2~9\u5468 G2-B403 :4(8,9,10) \u6768\u6674\n2~9\u5468 G2-B403 :4(8,9,10) \u5b5f\u5f81\n2~9\u5468 G2-B403 :4(11,12) \u6768\u6674\n2~9\u5468 G2-B403 :4(11,12) \u5b5f\u5f81",
+    "courseType": "\u7406\u8bba\u8bfe",
+    "courseGradation": "\u7855\u58eb",
+    "courseCategory": "\u7814\u7a76\u751f\u8bfe\u7a0b",
+    "educationType": "\u7814\u7a76\u751f",
+    "classType": "\u57fa\u7840",
+    "openDepartment": "\u5316\u5b66\u7cfb",
+    "description": "",
+    "credit": 2,
+    "additionalInfo": {}
+}

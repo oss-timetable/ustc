@@ -1,0 +1,21 @@
+{
+    "py/object": "models.course.Course",
+    "id": "159864",
+    "name": "\u4e13\u4e1a\u82f1\u8bed",
+    "courseCode": "EIEN6001U",
+    "lessonCode": "EIEN6001U.06",
+    "teacherName": "\u590f\u5b66\u6587",
+    "lectures": [],
+    "exams": [],
+    "homeworks": [],
+    "dateTimePlacePersonText": "2~10\u5468 GT-B110 :1(8,9,10) \u590f\u5b66\u6587",
+    "courseType": "\u7406\u8bba\u8bfe",
+    "courseGradation": "\u7855\u58eb",
+    "courseCategory": "\u7814\u7a76\u751f\u8bfe\u7a0b",
+    "educationType": "\u7814\u7a76\u751f",
+    "classType": "\u57fa\u7840",
+    "openDepartment": "\u5148\u8fdb\u6280\u672f\u7814\u7a76\u9662",
+    "description": "",
+    "credit": 2,
+    "additionalInfo": {}
+}
